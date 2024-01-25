@@ -50,6 +50,16 @@ const tempWatchedData = [
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
+export default function App() {
+  const [movies, setMovies] = useState(tempMovieData);
+  return (
+    <>
+      <Navbar movies={movies} />
+      <Main movies={movies} />
+    </>
+  );
+}
+
 const Navbar = ({ movies }) => {
   return (
     <nav className="nav-bar">
@@ -59,12 +69,12 @@ const Navbar = ({ movies }) => {
     </nav>
   );
 };
-let Logo = () => {
+const Main = ({ movies }) => {
   return (
-    <div className="logo">
-      <span role="img">🍿</span>
-      <h1>MoviesFinder</h1>
-    </div>
+    <main className="main">
+      <ListBox movies={movies} />
+      <WatchedBox />
+    </main>
   );
 };
 
@@ -75,7 +85,14 @@ let NumResults = ({ movies }) => {
     </p>
   );
 };
-
+let Logo = () => {
+  return (
+    <div className="logo">
+      <span role="img">🍿</span>
+      <h1>MoviesFinder</h1>
+    </div>
+  );
+};
 let Search = () => {
   const [query, setQuery] = useState("");
   return (
@@ -88,24 +105,6 @@ let Search = () => {
     />
   );
 };
-const Main = ({ movies }) => {
-  return (
-    <main className="main">
-      <ListBox movies={movies} />
-      <WatchedBox />
-    </main>
-  );
-};
-
-export default function App() {
-  const [movies, setMovies] = useState(tempMovieData);
-  return (
-    <>
-      <Navbar movies={movies} />
-      <Main movies={movies} />
-    </>
-  );
-}
 
 let ListBox = ({ movies }) => {
   const [isOpen1, setIsOpen1] = useState(true);
